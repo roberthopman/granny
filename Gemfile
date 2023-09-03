@@ -4,7 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.3.0.dev"
 
 gem "ruby-openai", "~> 4.0.0"
+gem 'devise'
 gem "sidekiq", "~> 7.0.9"
+
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.7", ">= 7.0.7.2"

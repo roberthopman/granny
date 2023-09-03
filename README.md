@@ -1,3 +1,13 @@
+Granny is an elderly application with AI features.
+
+```sh
+bin/setup
+bin/dev
+```
+
+User email address and user password are pre-populated in the database when signing in.
+
+
 # README
 
 This README would normally document whatever steps are necessary to get the

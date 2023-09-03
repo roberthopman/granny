@@ -1,5 +1,8 @@
-<div>
-  <h1 class="font-bold text-4xl text-blue-500">
-    <p data-controller="hello" data-action="click->hello#handleClick"></p>
-  </h1>  
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-10 rounded shadow-xl">
+        <h1 class="text-4xl font-bold mb-5">Welcome to Granny</h1>
+        <h1 class="bg-blue-500 text-white py-2 px-4 rounded">
+          <%= button_to "Start a conversation to keep her awake...", chats_path, method: :post %>
+        </h1>
+    </div>
 </div>
