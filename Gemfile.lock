@@ -102,9 +102,6 @@ GEM
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
     faraday-net_http (3.0.2)
-    ffi (1.15.5)
-    font-awesome-sass (6.4.2)
-      sassc (~> 2.0)
     globalid (1.2.0)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -203,8 +200,6 @@ GEM
       faraday-multipart (>= 1)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    sassc (2.4.0)
-      ffi (~> 1.9)
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -263,7 +258,6 @@ DEPENDENCIES
   capybara
   debug
   devise
-  font-awesome-sass
   importmap-rails
   jbuilder
   pg (~> 1.1)
