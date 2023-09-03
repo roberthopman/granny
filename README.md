@@ -5,8 +5,15 @@ bin/setup
 bin/dev
 ```
 
-User email address and user password are pre-populated in the database when signing in.
+Notes: 
+- User email address and user password are pre-populated in the database when signing in. 
+- Procfile.dev is for bin/dev and Procfile is for Heroku
 
+Deployment
+- heroku create
+- git push heroku main
+- enable redis/sidekiq: https://devcenter.heroku.com/articles/ah-redis-stackhero
+- heroku run rails db:migrate
 
 # README
 
