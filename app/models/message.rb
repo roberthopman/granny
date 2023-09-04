@@ -1,6 +1,8 @@
 class Message < ApplicationRecord
   include ActionView::RecordIdentifier
 
+  default_scope { order(created_at: :asc) }
+
   enum role: { system: 0, assistant: 10, user: 20 }
 
   belongs_to :chat
