@@ -5,7 +5,7 @@ ruby "3.2.2"
 
 gem "ruby-openai", "~> 4.0.0"
 gem 'devise'
-gem 'sidekiq', "< 7.0"
+gem 'sidekiq', "< 8.0"
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
