@@ -29,19 +29,23 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      
+      - name: Install AppMap tools
+        id: install-appmap
+        uses: getappmap/install-action@v1
+        with:
+          project-type: bundler
+
       - name: Create Database
         run: bin/rails db:create 
       - name: Migrate Database
         run: bin/rails db:migrate
       - name: Build tailwind
         run: bin/rails tailwindcss:build
-      - name: Install AppMap tools
-        id: install-appmap
-        uses: getappmap/install-action@v1
-        with:
-          project-type: bundler
+      
       - name: Run tests
         run: bin/rails test
+        
       - name: Archive AppMaps
         uses: getappmap/archive-action@v1
         with:
