@@ -35,4 +35,4 @@ jobs:
       - name: Migrate Database
         run: bin/rails db:migrate
       - name: Run tests
-        run: bin/rake
+        run: bin/rails test
