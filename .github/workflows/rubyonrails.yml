@@ -29,7 +29,13 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Set up database schema
-        run: bin/rails db:schema:load
+      - name: Create Database
+        run: bin/rails db:create 
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/granny_test
+      - name: Migrate Database
+        run: bin/rails db:migrate
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/granny_test
       - name: Run tests
         run: bin/rake
