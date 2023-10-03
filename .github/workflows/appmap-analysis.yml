@@ -3,6 +3,11 @@ name: "appmap-analysis"
 on:
   pull_request:
     branches: [ "main" ]
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * 0'
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -42,7 +47,18 @@ jobs:
           project-type: bundler
       - name: Run tests
         run: bin/rails test
-      - name: Archive AppMaps
-        uses: getappmap/archive-action@v1
+      - name: Save AppMaps
+        uses: actions/cache/save@v3
+        if: always()
         with:
-          revision: ${{ github.event.pull_request.base.sha }}
+          path: ${{ steps.install-appmap.outputs.appmap-dir }}
+          key: appmaps-${{ github.sha }}-${{ github.run_attempt }}
+  appmap-analysis:
+    if: always()
+    needs: [test]
+    uses: getappmap/analyze-action/.github/workflows/appmap-analysis.yml@v1
+    permissions:
+      actions: read
+      contents: read
+      checks: write
+      pull-requests: write          
