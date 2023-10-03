@@ -34,7 +34,7 @@ jobs:
         run: bin/rails db:create 
       - name: Migrate Database
         run: bin/rails db:migrate
-      - name: Run tailwind
+      - name: Build tailwind
         run: bin/rails tailwindcss:build
       - name: Run tests
         run: bin/rails test
