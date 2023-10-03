@@ -39,7 +39,7 @@ jobs:
         id: install-appmap
         uses: getappmap/install-action@v1
         with:
-          project-type: bundler
+          project-type: yarn
       - name: Run tests
         run: bin/rails test
       - name: Archive AppMaps
