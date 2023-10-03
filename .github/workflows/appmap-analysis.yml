@@ -29,7 +29,9 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      
+          
+      - name: Enable appmap gem update
+        run: bundle config unset deployment   
       - name: Install AppMap tools
         id: install-appmap
         uses: getappmap/install-action@v1
