@@ -41,5 +41,18 @@ jobs:
         run: bin/rails db:migrate
       - name: Build tailwind
         run: bin/rails tailwindcss:build
+      # Begin install-action snippet
+      #
+      - name: Enable appmap gem update
+        run: bundle config unset deployment
+      - name: Install AppMap tools
+        id: install-appmap
+        uses: getappmap/install-action@v1
+        with:
+          project-type: bundler
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+      #
+      # End install-action snippet
       - name: Run tests
         run: bin/rails test
