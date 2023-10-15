@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
+gem 'appmap', :groups => [:development, :test]
+
 gem "ruby-openai", "~> 4.0.0"
 gem 'devise'
 gem 'sidekiq', "< 8.0"

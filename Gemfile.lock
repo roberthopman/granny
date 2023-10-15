@@ -68,6 +68,11 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
+    appmap (0.102.1)
+      activesupport
+      method_source
+      rack
+      reverse_markdown
     bcrypt (3.1.19)
     bindex (0.8.1)
     bootsnap (1.16.0)
@@ -196,6 +201,8 @@ GEM
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
+    reverse_markdown (2.1.1)
+      nokogiri
     rexml (3.2.6)
     ruby-openai (4.0.0)
       faraday (>= 1)
@@ -257,6 +264,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  appmap
   bootsnap
   capybara
   debug
