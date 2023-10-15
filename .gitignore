@@ -35,3 +35,12 @@
 
 # Ignore envrc
 .envrc
+
+# AppMap artifacts
+/.appmap
+
+# Node modules
+/node_modules
+
+# Vendored Ruby gems
+/vendor
