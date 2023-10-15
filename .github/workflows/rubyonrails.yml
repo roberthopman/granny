@@ -28,9 +28,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          # Checkout pull request head so that a commit can be made
-          ref: ${{ github.event.pull_request.head.ref }}        
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -41,22 +38,5 @@ jobs:
         run: bin/rails db:migrate
       - name: Build tailwind
         run: bin/rails tailwindcss:build
-      # Begin install-action snippet
-      #
-      - name: Enable appmap gem update
-        run: bundle config unset deployment
-      - name: Install AppMap tools
-        id: install-appmap
-        uses: getappmap/install-action@v1
-        with:
-          project-type: bundler
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v9
-      #
-      # End install-action snippet
       - name: Run tests
         run: bin/rails test
-      - name: Archive AppMaps
-        uses: getappmap/archive-action@v1
-        with:
-          revision: ${{ github.event.pull_request.base.sha }}
