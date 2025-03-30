@@ -1,13 +1,48 @@
 <%= turbo_frame_tag "#{dom_id(chat)}_message_form" do %>
-  <%= form_with(model: Message.new, url: [chat, chat.messages.new]) do |form| %>
+  <%= form_with(model: Message.new, url: [chat, chat.messages.new],
+        data: { 
+          controller: "image-generation",
+          turbo: true,
+          chat_id: dom_id(chat),
+          message_container_id: "#{dom_id(chat)}_messages"
+        }
+      ) do |form| %>
     <div class="my-5 px-20">
-      <%= form.text_area :content, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", autofocus: true, "x-on:keydown.cmd.enter" => "$event.target.form.requestSubmit();" %>
+      <%= form.text_area :content, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", autofocus: true, "x-on:keydown.cmd.enter" => "$event.target.form.requestSubmit();",
+          data: { image_generation_target: "textarea" },
+          placeholder: "Type your message or describe an image you want to generate..." %>
     </div>
 
-    <div class="grid justify-items-end">
-      <%= form.button type: :submit, class: "rounded-lg py-3 px-3 mx-20 bg-blue-600 text-white inline-block font-medium cursor-pointer my-2" do %>
-        <span>Send</span>
-      <% end %>
+    <div class="my-5 px-20">
+      <%= form.text_field :url, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", 
+      placeholder: "Enter an image URL to edit..." %>
+    </div>
+
+    <div class="px-20 mb-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <label class="inline-flex items-center">
+            <%= form.select :image_action, Attachment::IMAGE_ACTIONS.map { |action| [action.last, action.first] }, { include_blank: "Text" },
+                class: "form-select rounded-md border-gray-300 text-sm" %>
+          </label>
+
+            <select name="size" class="form-select text-sm rounded-md border-gray-300 text-sm">
+              <option value="1024x1024" selected>Square (1024x1024)</option>
+              <option value="1792x1024">Landscape (1792x1024)</option>
+              <option value="1024x1792">Portrait (1024x1792)</option>
+            </select>
+
+            <select name="quality" class="rounded-md border-gray-300 text-sm">
+              <option value="standard">Standard</option>
+              <option value="hd">HD</option>
+            </select>
+          
+        </div>
+
+        <%= form.button type: :submit, class: "rounded-lg py-2 px-4 bg-blue-600 text-white font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" do %>
+          Send
+        <% end %>
+      </div>
     </div>
   <% end %>
 <% end %>

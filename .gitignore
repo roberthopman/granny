@@ -35,3 +35,4 @@
 
 # Ignore envrc
 .envrc
+dump.rdb

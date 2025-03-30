@@ -6,6 +6,9 @@ class Message < ApplicationRecord
   enum role: { system: 0, assistant: 10, user: 20 }
 
   belongs_to :chat
+  has_many :attachments, dependent: :destroy
+
+  attr_accessor :image_action, :url
 
   after_create_commit -> { broadcast_created }
   after_update_commit -> { broadcast_updated }

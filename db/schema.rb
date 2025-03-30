@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_03_104213) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_22_104213) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.bigint "message_id", null: false
+    t.integer "content_type", default: 0, null: false
+    t.integer "status", default: 0, null: false
+    t.string "prompt"
+    t.string "url"
+    t.jsonb "metadata", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id", "content_type"], name: "index_attachments_on_message_id_and_content_type"
+    t.index ["message_id"], name: "index_attachments_on_message_id"
+    t.index ["status"], name: "index_attachments_on_status"
+  end
 
   create_table "chats", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -42,6 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_03_104213) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attachments", "messages"
   add_foreign_key "chats", "users"
   add_foreign_key "messages", "chats"
 end

@@ -1,0 +1,39 @@
+<div id="<%= dom_id(attachment) %>" class="my-5 bg-gray-300">
+  <% case attachment.content_type %>
+  <% when "image" %>
+    <% if attachment.completed? %>
+      <%= image_tag attachment.url, class: "shadow-sm", style: "max-width: 50vw; max-height: 50vh;" %>
+      
+      <div class="flex flex-col group border border-red-400 my-2" data-controller="copy">
+        <div class="flex-1 pl-2" data-copy-target="text">
+          <%= attachment.url %>
+        </div>
+        <div class="flex mt-2">
+          <button data-copy-target="button" 
+                  data-action="click->copy#copy"
+                  class="bg-sky-400 text-black py-1 px-2 text-sm">
+            Copy text
+          </button>
+        </div>
+      </div>
+
+      <% if attachment.metadata["revised_prompt"].present? %>
+        <div class="mt-2">
+          Revised prompt:
+          <%= render partial: "messages/message_content", locals: { content: "#{attachment.metadata['revised_prompt']}" } %>
+        </div>
+      <% end %>
+    <% elsif attachment.processing? %>
+      <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+        <div class="mr-3">
+          <div class="w-5 h-5 border-2 border-blue-500 rounded-full border-t-transparent animate-spin"></div>
+        </div>
+        <span class="text-gray-600">Generating image; this may take 3-5 seconds...</span>
+      </div>
+    <% elsif attachment.failed? %>
+      <div class="p-3 text-red-700 bg-red-50 rounded-lg">
+        Failed to generate image: <%= attachment.metadata["error"] %>
+      </div>
+    <% end %>
+  <% end %>
+</div> 

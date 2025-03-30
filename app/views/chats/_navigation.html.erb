@@ -1,11 +1,21 @@
-<div class="flex flex-col space-y-1 h-screen">
-  <%= button_to "Start a new conversation to keep her awake...", chats_path, method: :post, class: "bg-blue-300 text-white py-2 px-4 rounded m-2" %>
+<div class="flex flex-col h-screen">
+  <div class="flex-none">
+    <h1 class="text-black text-2xl font-bold m-2">
+      Granny
+    </h1>
+    <%= link_to "Open a new chat to keep her awake..", chats_path, method: :post, class: "bg-blue-500 text-white py-2 px-2 rounded mx-2 block" %>
+  </div>
 
-  <% @chats.each do |chat| %>
-    <%= link_to chat.messages[0]&.content&.truncate_words(16), chat_path(chat), class: "bg-blue-500 text-white py-2 px-2 rounded mx-2" %>
-  <% end %>
+  <div class="flex-1 overflow-y-auto">
+    <div class="space-y-1">
+      <h2 class="text-black text-2xl font-bold m-2">Conversations</h2>
+      <% @chats.each do |chat| %>
+        <%= link_to chat.messages[0]&.content&.truncate_words(16), chat_path(chat), class: "bg-blue-500 text-white py-2 px-2 rounded mx-2 block" %>
+      <% end %>
+    </div>
+  </div>
 
-  <div class="absolute bottom-1 m-2">
+  <div class="flex-none m-2">
     <% if user_signed_in? %>
       <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "bg-blue-900 text-white py-2 px-4 rounded" %>
     <% else %>
