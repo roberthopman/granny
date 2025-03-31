@@ -6,8 +6,12 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
-  config.cache_store = :redis_cache_store, { url: ENV['STACKHERO_REDIS_URL_TLS'] }
-
+  config.cache_store = :redis_cache_store, {
+    url: ENV['REDIS_URL'],
+    ssl_params: {
+      verify_mode: OpenSSL::SSL::VERIFY_NONE
+    }
+  }
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers

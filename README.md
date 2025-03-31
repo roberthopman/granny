@@ -12,8 +12,9 @@ Notes:
 Deployment
 - heroku create
 - git push heroku main
-- enable redis/sidekiq: https://devcenter.heroku.com/articles/ah-redis-stackhero
+- heroku: provision heroku postgres add-on
 - heroku run rails db:migrate
+- heroku: provision heroku key-value store for redis for sidekiq
 
 # README
 
