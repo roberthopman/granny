@@ -7,5 +7,5 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV['STACKHERO_REDIS_URL_TLS'] %>
+  url: <%= ENV['REDIS_URL'] %>
   channel_prefix: granny_production

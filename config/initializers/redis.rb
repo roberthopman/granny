@@ -1,1 +1,1 @@
-$redis = Redis.new(url: ENV["STACKHERO_REDIS_URL_TLS"])
+$redis = Redis.new(url: ENV["REDIS_URL"], ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE })
