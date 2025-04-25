@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "#{dom_id(chat)}_message_form" do %>
   <%= form_with(model: Message.new, url: [chat, chat.messages.new],
-        data: { 
+        data: {
           controller: "image-generation",
           turbo: true,
           chat_id: dom_id(chat),
@@ -14,7 +14,7 @@
     </div>
 
     <div class="my-5 px-20">
-      <%= form.text_field :url, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", 
+      <%= form.text_field :url, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full",
       placeholder: "Enter an image URL to edit..." %>
     </div>
 
@@ -33,10 +33,11 @@
             </select>
 
             <select name="quality" class="rounded-md border-gray-300 text-sm">
-              <option value="standard">Standard</option>
-              <option value="hd">HD</option>
+              <option value="low">Low</option>
+              <option value="auto">Auto</option>
+              <option value="hd">HD (for Dall-E 3)</option>
             </select>
-          
+
         </div>
 
         <%= form.button type: :submit, class: "rounded-lg py-2 px-4 bg-blue-600 text-white font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" do %>

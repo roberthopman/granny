@@ -3,9 +3,9 @@ module ImageGenerationService
     class Error < StandardError; end
 
     ALLOWED_SIZES = ["1024x1024", "1792x1024", "1024x1792"].freeze
-    ALLOWED_QUALITIES = ["standard", "hd"].freeze
+    ALLOWED_QUALITIES = ["auto", "low", "hd"].freeze
     DEFAULT_SIZE = "1024x1024".freeze
-    DEFAULT_QUALITY = "standard".freeze
+    DEFAULT_QUALITY = "auto".freeze
     ACTIONS = { generate: "generate", edit: "edit" }.freeze
 
     def self.call(prompt:, source_image: nil, size: DEFAULT_SIZE, quality: DEFAULT_QUALITY, config: ImageGenerationService::Configuration.default)
@@ -47,9 +47,16 @@ module ImageGenerationService
         model: @config.model,
         prompt: @prompt,
         size: @size,
-        quality: @quality,
         n: 1
-      }
+      }.merge(quality_parameter)
+    end
+
+    def quality_parameter
+      if @config.model != "dall-e-2"
+        { quality: @quality }
+      else
+        {}
+      end
     end
 
     def edit_parameters
@@ -106,8 +113,15 @@ module ImageGenerationService
       puts 'response'
       puts response
       puts "--------------------------------"
-      data = response.dig("data", 0)
-      return { url: data["url"], revised_prompt: data["revised_prompt"] } if data&.dig("url").present?
+      if @config.model != "gpt-image-1"
+        data = response.dig("data", 0)
+        return { url: data["url"], revised_prompt: data["revised_prompt"] } if data&.dig("url").present?
+      else
+        data = response.dig("data", 0)
+        base64_image = data["b64_json"]
+        base64_image = "data:image/png;base64,#{base64_image}"
+        return { url: base64_image } if base64_image.present?
+      end
 
       raise Error, "Failed to generate image: Invalid response format"
     end

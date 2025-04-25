@@ -3,7 +3,7 @@ module ImageGenerationService
     def self.default
       new(
         client: OpenAI::Client.new,
-        model: "dall-e-2"
+        model: "gpt-image-1"
       )
     end
   end

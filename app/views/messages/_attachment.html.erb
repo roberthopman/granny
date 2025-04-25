@@ -3,13 +3,13 @@
   <% when "image" %>
     <% if attachment.completed? %>
       <%= image_tag attachment.url, class: "shadow-sm", style: "max-width: 50vw; max-height: 50vh;" %>
-      
+
       <div class="flex flex-col group border border-red-400 my-2" data-controller="copy">
         <div class="flex-1 pl-2" data-copy-target="text">
           <%= attachment.url %>
         </div>
         <div class="flex mt-2">
-          <button data-copy-target="button" 
+          <button data-copy-target="button"
                   data-action="click->copy#copy"
                   class="bg-sky-400 text-black py-1 px-2 text-sm">
             Copy text
@@ -36,4 +36,4 @@
       </div>
     <% end %>
   <% end %>
-</div> 
+</div>
